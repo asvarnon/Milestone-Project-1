@@ -13,3 +13,6 @@ def getPosition():
     userIndexInput = int(input("Choose an index position: "))
     return userRowInput, userIndexInput
 
+userRowInput, userIndexInput = getPosition()
+print(userRowInput)
+print(userIndexInput)

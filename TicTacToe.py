@@ -12,14 +12,26 @@ def gameBoard(row1, row2, row3):
 
 
 #Gets position
-def getPosition():
-    userRowInput = int(input("Choose a row: "))
-    userIndexInput = int(input("Choose an index position: "))
-    return userRowInput, userIndexInput
+def getRow():
+    userRowInput = input("Choose a row (1-3): ")
+    while userRowInput.isdigit() == False:
+        userRowInput = input("Choose a row (1-3): ")
+        if not userRowInput.isdigit():
+            print("Sorry, that is not a digit.")
+    return int(userRowInput)
+        
 
-userRowInput, userIndexInput = getPosition()
+def getIndex():
+    userIndexInput = input("Choose an index position (1-3): ")
+    while userIndexInput.isdigit() == False:
+        userIndexInput = input("Choose a row (1-3): ")
+        if not userIndexInput.isdigit():
+            print("Sorry, that is not a digit.")
+    return int(userIndexInput)
+
+userRowInput = getRow()
+userIndexInput = getIndex()
 print(userRowInput)
 print(userIndexInput)
-
 
 

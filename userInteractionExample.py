@@ -1,8 +1,9 @@
-gameList = [0,1,2]
+# gameList = [0,1,2]
+# gameOn: True
 
 #displays list
 def displayGame(gameList):
-    print("Here is the current List")
+    print("Here is the current List:")
     print(gameList)
 
 #gets user Choice
@@ -22,11 +23,27 @@ def replacementChoice(gameList,position):
 #replayability
 def gameOnChoice():
     choice = 'wrong'
-    while choice not in ['Y', 'N']:
-        choice = input('Continue playing? Y/N')
-        if choice not in ['Y', 'N']:
+    while choice not in ['Y', 'N', 'y', 'n']:
+        choice = input('Continue playing? Y/N: \n')
+        if choice not in ['Y', 'N', 'y', 'n']:
             print('Sorry, invalid choice!')
-    return int(choice)
+    if choice == 'Y' or choice == 'y':
+        return True
+    else:
+        return False
+
+
+def startGame():
+    gameList = [0,1,2]
+    gameOn = True
+    while gameOn:
+        displayGame(gameList)
+        position = positionChoice()
+        gameList = replacementChoice(gameList, position)
+        displayGame(gameList)
+        gameOn = gameOnChoice()
+
+startGame()
 
 
 

@@ -12,7 +12,7 @@ def playerSides():
             print('Invalid Answer')
         else:
             print(f'Player 1 is: {player1}')
-            choices.remove(not player1)
+            choices.remove(player1)
             print(f'This is getting removed {choices}')
             player2 = choices[0]
             return player1, player2
@@ -21,10 +21,13 @@ def playerSides():
 player1 = playerSides()[0]
 player2 = playerSides()[1]
 
-# print(player1)
-# print(player2)
+print(player1)
+print(player2)
 
 
 def displayGame(gameList):
     print("Here is the current List:")
     print(gameList)
+
+
+

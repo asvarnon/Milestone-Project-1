@@ -21,13 +21,15 @@ def playerSides():
 player1 = playerSides()[0]
 player2 = playerSides()[1]
 
-print(player1)
-print(player2)
+# print(player1)
+# print(player2)
 
 
 def displayGame(gameList):
     print("Here is the current List:")
     print(gameList)
 
+def playGame():
+    return null
 
 

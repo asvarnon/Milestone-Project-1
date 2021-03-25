@@ -1,28 +1,25 @@
 from IPython.display import clear_output
 
-gameList = ['1','2','3','4','5','6','7','8','9']
+gameList = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
 
+'''
+OUTPUT = (Player 1, Player 2)
+'''
 def playerSides():
     player1 = ''
     player2 = ''
     choices = ['X', 'O']
     while player1 not in choices:
-        player1 = input("P1, Choose a side X or O: \n")
-        if player1 not in choices:
-            print('Invalid Answer')
+        player1 = input("P1, Choose a side X or O: \n").upper()
+        if player1 == 'X':
+            return ('X', 'O')
         else:
-            print(f'Player 1 is: {player1}')
-            choices.remove(player1)
-            print(f'This is getting removed {choices}')
-            player2 = choices[0]
-            return player1, player2
+            return ('O', 'X')
     
-# print(playerSides())
-# player1 = playerSides()[0]
-# player2 = playerSides()[1]
 
-# print(player1)
-# print(player2)
+player1, player2 = playerSides()
+print(player1)
+print(player2)
 
 
 def displayGame(gameList):
@@ -34,7 +31,15 @@ def displayGame(gameList):
     print('----------')
     print(gameList[0]+' | '+gameList[1]+' | '+gameList[2])
     
+def getPosition():
+    position = ''
+    while position not in range(1,10):
+        position = int(input('Choose a number between 1-9 to place your marker.\n'))
+    return position
 
+def placeMarker(board, marker, position):
+    gameList[position - 1] = marker
+
+placeMarker(gameList, player1, getPosition())
 displayGame(gameList)
-
 

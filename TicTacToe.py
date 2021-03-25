@@ -1,6 +1,7 @@
 from IPython.display import clear_output
 
 gameList = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
+testList = ['X',' ',' ',' ','X',' ',' ',' ','X']
 
 '''
 OUTPUT = (Player 1, Player 2)
@@ -40,6 +41,21 @@ def getPosition():
 def placeMarker(board, marker, position):
     gameList[position - 1] = marker
 
-placeMarker(gameList, player1, getPosition())
-displayGame(gameList)
+# placeMarker(gameList, player1, getPosition())
+# displayGame(gameList)
+
+def winCheck(board, mark):
+    # check all rows, and columns with 2 diagonals match. 
+    # (board[1] == mark and board[2] == mark and board[3] == mark)
+    return((board[0] == board[1] == board[2] == mark) or #bottom row
+    (board[3] == board[4] == board[5] == mark) or #middle Row
+    (board[6] == board[7] == board[8] == mark) or #top row
+    (board[0] == board[3] == board[6] == mark) or #left column
+    (board[1] == board[4] == board[7] == mark) or #middle column
+    (board[2] == board[5] == board[8] == mark) or #right column
+    (board[6] == board[4] == board[2] == mark) or #top left to bottom right diagonal
+    (board[0] == board[4] == board[8] == mark)) #bottom left to top right diagonal
+    
+displayGame(testList)
+print(winCheck(testList, 'X'))
 

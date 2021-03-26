@@ -1,4 +1,5 @@
 from IPython.display import clear_output
+import random
 
 gameList = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
 testList = ['X',' ',' ',' ','X',' ',' ',' ','X']
@@ -18,9 +19,9 @@ def playerSides():
             return ('O', 'X')
     
 
-player1, player2 = playerSides()
-print(player1)
-print(player2)
+# player1, player2 = playerSides()
+# print(player1)
+# print(player2)
 
 
 def displayGame(gameList):
@@ -32,11 +33,6 @@ def displayGame(gameList):
     print('----------')
     print(gameList[0]+' | '+gameList[1]+' | '+gameList[2])
     
-def getPosition():
-    position = ''
-    while position not in range(1,10):
-        position = int(input('Choose a number between 1-9 to place your marker.\n'))
-    return position
 
 def placeMarker(board, marker, position):
     gameList[position - 1] = marker
@@ -55,7 +51,79 @@ def winCheck(board, mark):
     (board[2] == board[5] == board[8] == mark) or #right column
     (board[6] == board[4] == board[2] == mark) or #top left to bottom right diagonal
     (board[0] == board[4] == board[8] == mark)) #bottom left to top right diagonal
-    
-displayGame(testList)
-print(winCheck(testList, 'X'))
+
+#TESTS 
+# displayGame(testList)
+# print(winCheck(testList, 'X'))
+
+def chooseFirst():
+    flip = random.randint(0,1)
+    if flip == 0:
+        return 'Player 1'
+    else:
+        return 'Player 2'
+
+def spaceCheck(board, position):
+        return board[position] == ' '
+
+def boardCheck(board):
+    for i in range(0,9):
+        if spaceCheck(board, i):
+            return False
+    #board is full if we return true
+    return True
+
+def getPosition(board):
+    position = ''
+    while position not in range(1,10) or not spaceCheck(board, position):
+        position = int(input('Choose a number between 1-9 to place your marker.\n'))
+    return position
+
+def replay():
+    choice = input("Play again? y/n")
+    return choice == 'y'
+
+
+
+#logic of game (while loop)
+print("TicTacToe")
+while True:
+    #play game
+    #Choose markers
+    theBoard = [' ']*10
+    player1Marker, player2Marker = playerSides()
+
+    turn = chooseFirst()
+    print(f'{turn} will go first')
+
+
+    playGame = input('Ready to play? y/n')
+    if playGame == 'y':
+        gameOn = True
+    else:
+        gameOn = False
+
+    #gameplay
+    while gameOn:
+        if turn == 'Player 1':
+            #player1 turn
+            #show board
+            displayGame(theBoard)
+
+            #choose position
+            position = getPosition(theBoard)
+            #place marker on position
+            #check if they won or check if tie
+            #no Tie and no win, then next turn
+
+        else:
+            #player2 turn
+
+    #player1 turn
+    #player2 turn
+
+    if no replay():
+        break
+
+#break out of loop on replay()
 

@@ -9,7 +9,6 @@ OUTPUT = (Player 1, Player 2)
 '''
 def playerSides():
     player1 = ''
-    player2 = ''
     choices = ['X', 'O']
     while player1 not in choices:
         player1 = input("P1, Choose a side X or O: \n").upper()
@@ -35,7 +34,8 @@ def displayGame(gameList):
     
 
 def placeMarker(board, marker, position):
-    gameList[position - 1] = marker
+    board[position - 1] = marker
+
 
 # placeMarker(gameList, player1, getPosition())
 # displayGame(gameList)
@@ -80,7 +80,7 @@ def getPosition(board):
     return position
 
 def replay():
-    choice = input("Play again? y/n")
+    choice = input("Play again? y/n\n")
     return choice == 'y'
 
 
@@ -90,14 +90,15 @@ print("TicTacToe")
 while True:
     #play game
     #Choose markers
-    theBoard = [' ']*10
+    theBoard = [' ',' ',' ',' ',' ',' ',' ',' ',' ']
     player1Marker, player2Marker = playerSides()
+    print(f'{player1Marker} is player 1')
+    print(f'{player2Marker} is player 2')
 
     turn = chooseFirst()
     print(f'{turn} will go first')
 
-
-    playGame = input('Ready to play? y/n')
+    playGame = input('Ready to play? y/n \n')
     if playGame == 'y':
         gameOn = True
     else:
@@ -112,17 +113,53 @@ while True:
 
             #choose position
             position = getPosition(theBoard)
+
             #place marker on position
+            placeMarker(theBoard, player1Marker, position)
+
             #check if they won or check if tie
+            if winCheck(theBoard, player1Marker):
+                displayGame(theBoard)
+                print('Player 1 has won!')
+                gameOn = False
+            else:
+                if boardCheck(theBoard):
+                    displayGame(theBoard)
+                    print("Tie Game")
+                    break
+                else:
+                    turn = 'Player 2'
+
             #no Tie and no win, then next turn
 
         else:
             #player2 turn
+            #show board
+            displayGame(theBoard)
+
+            #choose position
+            position = getPosition(theBoard)
+
+            #place marker on position
+            placeMarker(theBoard, player2Marker, position)
+
+            #check if they won or check if tie
+            if winCheck(theBoard, player2Marker):
+                displayGame(theBoard)
+                print('Player 2 has won!')
+                gameOn = False
+            else:
+                if boardCheck(theBoard):
+                    displayGame(theBoard)
+                    print("Tie Game")
+                    break
+                else:
+                    turn = 'Player 1'
 
     #player1 turn
     #player2 turn
 
-    if no replay():
+    if not replay():
         break
 
 #break out of loop on replay()
